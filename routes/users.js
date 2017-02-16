@@ -75,7 +75,7 @@ function doGet(req, res, next) {
         else if (err)
             return handleError(res, err);
         else
-            return common.sendResponse(res, null, { found.id, found.username, found.avatar });
+            return common.sendResponse(res, null, { id: found.id, username: found.username, avatar: found.avatar });
     });
 }
 
@@ -87,7 +87,7 @@ function doFind(req, res, next) {
         else if (err)
                 return handleError(res, err);
             else
-                return common.sendResponse(res, null, { found.id, found.username, found.avatar });
+                return common.sendResponse(res, null, { id: found.id, username: found.username, avatar: found.avatar });
     });
 }
 

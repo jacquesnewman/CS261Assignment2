@@ -1,5 +1,5 @@
 let users = require('../models/user');
-let sessions require('../models/session');
+let sessions = require('../models/session');
 let guid = require('guid');
 
 module.exports.middleware = function(req, res, next) {
