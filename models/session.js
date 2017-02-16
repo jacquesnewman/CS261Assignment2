@@ -3,12 +3,16 @@ let guid = require('guid');
 let _sessions = { };
 
 module.exports.create = function(callback) {
-    let result = { id: guid.create() };
+    let result = { session: guid.create() };
     result.save = (callback) => {
         process.nextTick(() => { callback(null); });
     };
+    result.destroy = (callback) => {
+        delete _sessions[this.session];
+        process.nextTick(() => { callback(null, this); });
+    }
 
-    _sessions[result.id] = result;
+    _sessions[result.session] = result;
     return process.nextTick(() => { callback(null, result); });
 }
 

@@ -7,10 +7,9 @@ module.exports.middleware = function(req, res, next) {
         return res.send(JSON.stringify({ status: "fail", reason: { "_token" : "Invalid" } }));
     
     sessions.findId(req.body._session, (err, found) => {
-        if (!found || found._token != req.body._token)
+        if (!found || found.token != req.body._token)
             return res.send(JSON.stringify({ status: "fail", reason: { "_token" : "Invalid" } }));
-        else
-        {
+        else {
             req.session = found;
             return next();
         }
@@ -25,19 +24,19 @@ module.exports.authenticate = function(username, password, callback) {
             return callback("Unauthorized");
         else if (found.password != password)
             return callback("Unauthorized");
-        else
-        {
+        else {
             sessions.create((err, result) => {
                 if (err)
                     return callback(err);
                 else
                 {
-                    result._token = guid.create();
+                    result.token = guid.create();
+                    result.id = found.id;
                     return result.save((err) => {
                             if (err)
                                 return callback(err);
                             else
-                                return callback(null, true);
+                                return callback(null, result);
                         });
                 }
             });

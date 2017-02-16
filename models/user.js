@@ -6,7 +6,7 @@ let _tempUserIdIndex = { };
 
 module.exports.create = function(username, password, callback) {
     if (_tempUserUsernameIndex[username])
-        return process.nextTick(() => { callback("Already exists"); });
+        return process.nextTick(() => { callback("Already taken"); });
 
     let result = { username: username, password: password, id: guid.create() };
     result.save = (callback) => {
@@ -22,7 +22,7 @@ module.exports.create = function(username, password, callback) {
 
 module.exports.findUsername = function(username, callback) {
     let index = _tempUserUsernameIndex[username];
-    if (typeof index === 'undefined')
+    if (index === undefined)
         return process.nextTick(() => { callback("Not found"); });
     else
         return process.nextTick(() => { callback(null, _tempUserStorage[index]); });
@@ -30,7 +30,7 @@ module.exports.findUsername = function(username, callback) {
 
 module.exports.findId = function(id, callback) {
     let index = _tempUserIdIndex[id];
-    if (typeof index === 'undefined')
+    if (index === undefined)
         return process.nextTick(() => { callback("Not found"); });
     else
         return process.nextTick(() => { callback(null, _tempUserStorage[index]); });
