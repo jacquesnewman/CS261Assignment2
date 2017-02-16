@@ -3,7 +3,39 @@ let auth = require('../utils/auth');
 
 let _root = '/';
 
+function compose_response(res, err, payload) {
+    if (err)
+        return res.send(JSON.stringify({ status: "fail", reason: err }));
+    else
+        return res.send(JSON.stringify({ status: "success", data: payload }));
+}
 
+function do_create(req, res, next) {
+    let result = { };
+
+    let required = [ "username", "password" ];
+
+}
+
+function do_login(req, res, next) {
+
+}
+
+function do_logout(req, res, next) {
+
+}
+
+function do_get(req, res, next) {
+
+}
+
+function do_find(req, res, next) {
+
+}
+
+function do_update(req, res, next) {
+
+}
 
 module.exports.register = (root, app, authMiddleware) => {
     _root = root;
