@@ -23,7 +23,7 @@ module.exports.create = function(username, password, callback) {
 module.exports.findUsername = function(username, callback) {
     let index = _tempUserUsernameIndex[username];
     if (index === undefined)
-        return process.nextTick(() => { callback("Not found"); });
+        return process.nextTick(() => { callback(null, null); });
     else
         return process.nextTick(() => { callback(null, _tempUserStorage[index]); });
 }
@@ -31,7 +31,7 @@ module.exports.findUsername = function(username, callback) {
 module.exports.findId = function(id, callback) {
     let index = _tempUserIdIndex[id];
     if (index === undefined)
-        return process.nextTick(() => { callback("Not found"); });
+        return process.nextTick(() => { callback(null, null); });
     else
         return process.nextTick(() => { callback(null, _tempUserStorage[index]); });
 }
