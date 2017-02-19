@@ -12,18 +12,18 @@ function handleError(res, err) {
 }
 
 function doCreate(req, res, next) {
-    let params = common.verifyParameters(req, [ "username", "password" ], [ "avatar" ]);
+    let args = common.verifyArguments(req, [ "username", "password" ], [ "avatar" ]);
     let result = { };
 
-    if (params.status != "success")
-        return common.sendJSON(res, params);
+    if (args.status != "success")
+        return common.sendJSON(res, args);
 
-    users.create(params.data.username, params.data.password, (err, result) => {
+    users.create(args.data.username, args.data.password, (err, result) => {
         if (err == "Already taken")
             return common.sendResponse(res, { username: err });
         
-        if (params.data.avatar) {
-            result.avatar = params.data.avatar;
+        if (args.data.avatar) {
+            result.avatar = args.data.avatar;
             result.save((err) => {
                 if (err)
                     return handleError(res, err);
@@ -37,11 +37,11 @@ function doCreate(req, res, next) {
 }
 
 function doLogin(req, res, next) {
-    let params = common.verifyParameters(req, [ "username", "password" ]);
-    if (params.status != "success")
-        return common.sendJSON(res, params);
+    let args = common.verifyArguments(req, [ "username", "password" ]);
+    if (args.status != "success")
+        return common.sendJSON(res, args);
 
-    auth.authenticate(params.data.username, params.data.password, (err, session) => {
+    auth.authenticate(args.data.username, args.data.password, (err, session) => {
         if (err == "Unauthorized")
             return common.sendJSON(res, { status: "fail", reason: "Username/password mismatch" });
         else if (err)
@@ -92,7 +92,48 @@ function doFind(req, res, next) {
 }
 
 function doUpdate(req, res, next) {
+    let args = common.verifyArguments(req, [ ], [ "oldPassword", "newPassword", "avatar" ]);
 
+    let id = req.params.id;
+    if (req.session.id != id)
+        return common.sendResponse(res, { "id": "Forbidden" });
+    
+    users.findId(id, (err, found) => {
+        if (err == "Not found")
+            return common.sendResponse(res, { "id": "Not found" });
+        else if (err)
+            return handleError(res, err);
+        else {
+            if (args.data.oldPassword && found.password != args.data.oldPassword)
+                return common.sendResponse(res, { "oldPassword": "Forbidden" });
+
+            let changedPassword = false;
+            let changedAvatar = false;
+
+            if (args.data.oldPassword && args.data.newPassword) {
+                changedPassword = (found.password != args.data.newPassword);
+                found.password = args.data.newPassword;
+            }
+
+            if (args.data.avatar) {
+                changedAvatar = (found.avatar != args.data.avatar);
+                found.avatar = args.data.avatar;
+            }
+
+            found.save((err) => {
+                if (err)
+                   return handleError(res, err);
+
+                let fields = { };
+                if (changedPassword)
+                    fields.passwordChanged = true;
+                if (changedAvatar)
+                    fields.avatar = args.data.avatar;
+
+                return common.sendResponse(res, null, fields);
+            });
+        }
+    });
 }
 
 module.exports.register = (root, app, authMiddleware) => {

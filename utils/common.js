@@ -13,7 +13,7 @@ module.exports.sendStatusCode = function(res, code = 500, text = "Internal serve
     return res.status(code).send(text);
 }
 
-module.exports.verifyParameters = function(req, valid, optional) {
+module.exports.verifyArguments = function(req, valid, optional) {
     let errors = { };
     let fields = { };
     let success = true;
