@@ -5,7 +5,7 @@ let _tempUserUsernameIndex = { };
 let _tempUserIdIndex = { };
 
 module.exports.create = function(username, password, callback) {
-    if (_tempUserUsernameIndex[username])
+    if (_tempUserUsernameIndex[username] !== undefined)
         return process.nextTick(() => { callback("Already taken"); });
 
     let result = { username: username, password: password, id: guid.create() };
