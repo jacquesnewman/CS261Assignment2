@@ -1,13 +1,16 @@
 let users = require('../models/user');
 let sessions = require('../models/session');
 let guid = require('guid');
+let common = require('./common');
 
 module.exports.middleware = function(req, res, next) {
-    if (!req.body._session)
-        return res.send(JSON.stringify({ status: "fail", reason: { "_token" : "Invalid" } }));
-    
-    sessions.findId(req.body._session, (err, found) => {
-        if (!found || found.token != req.body._token)
+    let authArgs = common.verifyArguments(req, [ "_session", "_token" ], [] );
+
+    if(authArgs.status != 'success')
+      return res.send(JSON.stringify({ status: "fail", reason: authArgs.reason }));
+
+    sessions.findId(authArgs.data._session, (err, found) => {
+        if (!found || found.token != authArgs.data._token)
             return res.send(JSON.stringify({ status: "fail", reason: { "_token" : "Invalid" } }));
         else {
             req.session = found;
