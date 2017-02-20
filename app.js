@@ -22,7 +22,7 @@ app.use(jsonUtils.responseMiddleware);
 
 users.register('/users/', app, auth.middleware);
 
-app.listen(port, function() {
+app.listen(port, () => {
   console.log("Node app " + __filename + " is listening on port " + port + "!");
 });
 
