@@ -1,9 +1,9 @@
-let guid = require('guid');
+let uuid = require('uuid/v4');
 
 let _sessions = { };
 
 module.exports.create = function(callback) {
-    let result = { session: guid.create() };
+    let result = { session: uuid() };
     result.save = (callback) => {
         process.nextTick(() => { callback(null); });
     };

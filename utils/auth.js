@@ -1,7 +1,7 @@
 let users = require('../models/user');
 let sessions = require('../models/session');
-let guid = require('guid');
 let common = require('./common');
+let uuid = require('uuid/v4');
 
 module.exports.middleware = function(req, res, next) {
     let authArgs = common.verifyArguments(req, [ "_session", "_token" ], [] );
@@ -33,7 +33,7 @@ module.exports.authenticate = function(username, password, callback) {
                     return callback(err);
                 else
                 {
-                    result.token = guid.create();
+                    result.token = uuid();
                     result.id = found.id;
                     return result.save((err) => {
                             if (err)
