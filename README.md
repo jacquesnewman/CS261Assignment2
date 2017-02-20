@@ -5,8 +5,9 @@
 
 
 # File Structure
+
   **`/models/`** : Each data object (a user, a session, etc) gets its own js file here
-  **`/node_modules/`** : Not present when you first download the repo. You will need to run `npm install`, after which point this directory will include all modules that are defined in `package.json`. `
+  **`/node_modules/`** : Not present when you first download the repo. You will need to run `npm install`, after which point this directory will include all modules that are defined in `package.json`.
     - *NOTE: `/node_modules/` is deliberately ignored by `.gitignore`. It is expected every user of the repo will run `npm install` to retrieve the informatino themselves to keep the size of the repository to a minimum.*
   **`/routes/`** : One file per main route. As withj users, often models have their own routes file
   **`/utils/`** : general utilities, such as various middleware
@@ -19,6 +20,7 @@
 
 
 # To Install
+
 - Copy `.env_EXAMPLE` to a new file named `.env`
   ````
   cp .env_EXAMPLE .env
