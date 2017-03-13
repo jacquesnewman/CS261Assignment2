@@ -1,0 +1,10 @@
+extends ../layout
+
+block body
+    ul(id="messages")
+    form(action="")
+        input(id="m", type="text")
+        button(type="submit")
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js')
+    script.
+        var socket = io();
