@@ -2,6 +2,6 @@
 	"apps" : [{
 		"name"   : "assignment2",
 		"script" : "./app.js",
-		"watch"  : true,
+		"watch"  : true
 	}]
 }
