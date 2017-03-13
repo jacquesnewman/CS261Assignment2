@@ -2,6 +2,10 @@
 	"apps" : [{
 		"name"   : "assignment2",
 		"script" : "./app.js",
-		"watch"  : true
+		"watch"  : true,
+		"env": {
+			"NODE_PORT": 7000,
+			"NODE_LOG_LEVEL": "dev"
+		}
 	}]
 }
