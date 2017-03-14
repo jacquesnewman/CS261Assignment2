@@ -2,10 +2,12 @@ extends ../layout
 
 block body
     script.
+        let first = new Date().valueOf();
+
         const ws = new WebSocket('ws://steph-beeman.cs261.net:8008/game/testsocket');
 
         ws.onmessage = function(event) {
-            console.log(new Date() + ' ==> ' + event.data);
+            console.log((new Date().valueOf() - first) + ' ==> ' + event.data);
         }
 
         ws.onopen = function(event) {

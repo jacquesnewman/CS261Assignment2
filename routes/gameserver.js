@@ -31,7 +31,11 @@ module.exports.listen = (server) => {
     _server = new ws.Server({ server: server, perMessageDeflate: false });
 console.log("1");
 
+    let first = new Date().valueOf();
+
     _server.on('connection', (socket) => {
+        first = new Date().valueOf();
+
         console.log('CONNECTION ' + stringify(socket));
         console.log("2");
 
@@ -45,7 +49,7 @@ console.log("1");
     setInterval(() => {
         console.log("5");
         _server.clients.forEach( (client) => {
-            client.send(new Date());
+            client.send((new Date().valueOf()) - first);
         });
     }, 100);
     console.log("6");
