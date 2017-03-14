@@ -35,6 +35,12 @@ module.exports.listen = (server) => {
             console.log('DISCONNECTION ' + socket.id);
         });
     });
+
+    setInterval(() => {
+        _server.clients.forEach( (client) => {
+            client.send(new Date().toTimeString());
+        });
+    }, 100);
 }
 
 //hmm

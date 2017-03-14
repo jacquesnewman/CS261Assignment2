@@ -2,10 +2,10 @@ extends ../layout
 
 block body
     script.
-        const ws = new WebSocket('ws://steph-beeman.cs261.net:8008/game/testsocket');
+        const ws = new WebSocket('ws://steph-beeman.cs261.net:8008/');
 
         ws.onmessage = function(event) {
-            console.log(event.data);
+            console.log(new Date().toTimeString() + ' ==> ' + event.data);
         }
 
         ws.onopen = function(event) {
