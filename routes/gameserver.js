@@ -8,7 +8,7 @@ let io = require('socket.io');
 let _root = '/';
 let _server = null;
 
-function doLanding(req, res, next) {
+function doTestSocket(req, res, next) {
     res.setHeader('Content-Type', 'text/html');
     res.render('gameserver/client', { });
 }
