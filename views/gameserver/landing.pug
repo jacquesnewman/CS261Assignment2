@@ -4,9 +4,10 @@ block body
     script.
         const ws = new WebSocket('ws://steph-beeman.cs261.net:8008/game/testsocket');
 
-        ws.on('open', function() {
-            ws.send('something');
-        });
-        ws.on('message', function(message) {
-            console.log('received: %s', message);
-        });
+        ws.onmessage = function(event) {
+            console.log(event.data);
+        }
+
+        ws.onopen = function(event) {
+            console.log("Connected");
+        }
