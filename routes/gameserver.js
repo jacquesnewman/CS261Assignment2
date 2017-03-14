@@ -4,6 +4,8 @@ let common = require('../utils/common');
 let util = require('util');
 let moment = require('moment');
 let ws = require('ws');
+let stringify = require('json-stringify-safe');
+
 
 let _root = '/';
 let _server = null;
@@ -29,10 +31,10 @@ module.exports.listen = (server) => {
     _server = new ws.Server({ server: server, perMessageDeflate: false });
 
     _server.on('connection', (socket) => {
-        console.log('CONNECTION ' + JSON.stringify(socket));
+        console.log('CONNECTION ' + stringify(socket));
 
         socket.on('close', () => {
-            console.log('DISCONNECTION ' + JSON.stringify(socket));
+            console.log('DISCONNECTION ' + stringify(socket));
         });
     });
 
