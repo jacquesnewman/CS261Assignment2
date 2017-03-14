@@ -27,7 +27,7 @@ module.exports.register = (root, app, authMiddleware) => {
 
 module.exports.listen = (server) => {
     _server = new ws.Server({ server });
-
+console.log('yes');
     _server.on('connection', (socket) => {
         console.log('CONNECTION ' + socket.id);
 
@@ -36,6 +36,7 @@ module.exports.listen = (server) => {
         });
     });
 
+    console.log('still yes');
     setInterval(() => {
         console.log('ding ' + _server.clients.length);
 
@@ -43,4 +44,5 @@ module.exports.listen = (server) => {
             client.send(new Date().toTimeString());
         });
     }, 1000);
+    console.log('yup');
 }
