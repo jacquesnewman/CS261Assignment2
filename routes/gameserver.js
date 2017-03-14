@@ -29,10 +29,10 @@ module.exports.listen = (server) => {
     _server = new ws.Server({ server: server, perMessageDeflate: false });
 
     _server.on('connection', (socket) => {
-        console.log('CONNECTION ' + socket._handle.fd);
+        console.log('CONNECTION ' + JSON.stringify(socket));
 
         socket.on('close', () => {
-            console.log('DISCONNECTION ' + socket._handle.fd);
+            console.log('DISCONNECTION ' + JSON.stringify(socket));
         });
     });
 
