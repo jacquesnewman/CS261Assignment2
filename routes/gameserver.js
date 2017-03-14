@@ -10,19 +10,19 @@ let _server = null;
 
 function doTestSocket(req, res, next) {
     res.setHeader('Content-Type', 'text/html');
-    res.render('gameserver/client', { });
+    res.render('gameserver/landing', { });
 }
 
-function doLanding(req, res, next) {
+function doClient(req, res, next) {
     res.setHeader('Content-Type', 'text/html');
-    res.render('gameserver/landing', { });
+    res.render('gameserver/client', { });
 }
 
 module.exports.register = (root, app, authMiddleware) => {
     _root = root;
 
-    app.all(_root, doLanding);
-    app.all(_root + 'testsocket', );
+    app.all(_root, doClient);
+    app.all(_root + 'testsocket', doTestSocket);
 }
 
 module.exports.listen = (server) => {
