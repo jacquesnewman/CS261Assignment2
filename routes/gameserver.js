@@ -10,6 +10,11 @@ let _server = null;
 
 function doLanding(req, res, next) {
     res.setHeader('Content-Type', 'text/html');
+    res.render('gameserver/client', { });
+}
+
+function doLanding(req, res, next) {
+    res.setHeader('Content-Type', 'text/html');
     res.render('gameserver/landing', { });
 }
 
@@ -17,6 +22,7 @@ module.exports.register = (root, app, authMiddleware) => {
     _root = root;
 
     app.all(_root, doLanding);
+    app.all(_root + 'testsocket', doTestSocket);
 }
 
 module.exports.listen = (server) => {
