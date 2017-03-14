@@ -3,7 +3,7 @@ let auth = require('../utils/auth');
 let common = require('../utils/common');
 let util = require('util');
 let moment = require('moment');
-let io = require('socket.io');
+let ws = require('ws');
 
 let _root = '/';
 let _server = null;
@@ -26,12 +26,12 @@ module.exports.register = (root, app, authMiddleware) => {
 }
 
 module.exports.listen = (server) => {
-    _server = io(server);
+    _server = new ws.Server({ server });
 
     _server.on('connection', (socket) => {
         console.log('CONNECTION ' + socket.id);
 
-        socket.on('disconnect', () => {
+        socket.on('close', () => {
             console.log('DISCONNECTION ' + socket.id);
         });
     });
