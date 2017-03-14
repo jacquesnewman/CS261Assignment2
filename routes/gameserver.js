@@ -23,10 +23,10 @@ module.exports.listen = (server) => {
     _server = io(server);
 
     _server.on('connection', (socket) => {
-        console.log('CONNECTION ' + JSON.stringify(socket));
+        console.log('CONNECTION ' + socket.id);
 
         socket.on('disconnect', () => {
-            console.log('DISCONNECTION');
+            console.log('DISCONNECTION ' + socket.id);
         });
     });
 }
