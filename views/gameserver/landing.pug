@@ -5,7 +5,7 @@ block body
         const ws = new WebSocket('ws://steph-beeman.cs261.net:8008/game/testsocket');
 
         ws.onmessage = function(event) {
-            console.log(new Date().toTimeString() + ' ==> ' + event.data);
+            console.log(new Date() + ' ==> ' + event.data);
         }
 
         ws.onopen = function(event) {
