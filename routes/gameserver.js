@@ -37,10 +37,10 @@ module.exports.listen = (server) => {
     });
 
     setInterval(() => {
+        console.log('ding ' + _server.clients.length);
+
         _server.clients.forEach( (client) => {
             client.send(new Date().toTimeString());
         });
-    }, 100);
+    }, 1000);
 }
-
-//hmm
