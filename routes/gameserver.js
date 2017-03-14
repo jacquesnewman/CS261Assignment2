@@ -44,7 +44,7 @@ module.exports.listen = (server) => {
 //            console.log("3");
         });
     });
-    console.log("4");
+//    console.log("4");
 
     setInterval(() => {
         console.log("5");
@@ -52,5 +52,5 @@ module.exports.listen = (server) => {
             client.send((new Date().valueOf()) - first);
         });
     }, 100);
-    console.log("6");
+//    console.log("6");
 }
