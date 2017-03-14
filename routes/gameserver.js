@@ -29,7 +29,7 @@ module.exports.register = (root, app, authMiddleware) => {
 
 module.exports.listen = (server) => {
     _server = new ws.Server({ server: server, perMessageDeflate: false });
-console.log("1");
+//console.log("1");
 
     let first = new Date().valueOf();
 
@@ -37,11 +37,11 @@ console.log("1");
         first = new Date().valueOf();
 
         console.log('CONNECTION ' + stringify(socket));
-        console.log("2");
+//        console.log("2");
 
         socket.on('close', () => {
             console.log('DISCONNECTION ' + stringify(socket));
-            console.log("3");
+//            console.log("3");
         });
     });
     console.log("4");
