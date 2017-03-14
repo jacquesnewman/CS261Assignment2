@@ -22,7 +22,7 @@ module.exports.register = (root, app, authMiddleware) => {
     _root = root;
 
     app.all(_root, doLanding);
-    app.all(_root + 'testsocket', doTestSocket);
+    app.all(_root + 'testsocket', );
 }
 
 module.exports.listen = (server) => {
