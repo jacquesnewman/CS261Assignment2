@@ -29,18 +29,24 @@ module.exports.register = (root, app, authMiddleware) => {
 
 module.exports.listen = (server) => {
     _server = new ws.Server({ server: server, perMessageDeflate: false });
+console.log("1");
 
     _server.on('connection', (socket) => {
         console.log('CONNECTION ' + stringify(socket));
+        console.log("2");
 
         socket.on('close', () => {
             console.log('DISCONNECTION ' + stringify(socket));
+            console.log("3");
         });
     });
+    console.log("4");
 
     setInterval(() => {
+        console.log("5");
         _server.clients.forEach( (client) => {
             client.send(new Date());
         });
     }, 100);
+    console.log("6");
 }
