@@ -2,7 +2,6 @@ extends ../layout
 
 block body
     script.
-        const WebSocket = require('ws');
         const ws = new WebSocket('ws://steph-beeman.cs261.net:8008/game/testsocket');
 
         ws.on('open', function() {
