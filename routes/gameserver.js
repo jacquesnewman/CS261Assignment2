@@ -9,6 +9,7 @@ let _root = '/';
 let _server = null;
 
 function doLanding(req, res, next) {
+    res.setHeader('Content-Type', 'text/html');
     res.render('gameserver/landing', { });
 }
 
