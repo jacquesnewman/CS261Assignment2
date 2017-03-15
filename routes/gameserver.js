@@ -30,7 +30,7 @@ module.exports.register = (root, app, authMiddleware) => {
     _root = root;
 
     app.all(_root, authMiddleware, doClient);
-    app.all(_root + 'testsocket', doTestSocket);
+    app.all(_root + 'testsocket', authMiddleware, doTestSocket);
 }
 
 module.exports.listen = (server) => {
@@ -40,6 +40,10 @@ module.exports.listen = (server) => {
 
     _server.on('connection', (socket) => {
         first = new Date().valueOf();
+
+        socket.on('message', (data, flags) => {
+            console.log("RECV " + data);
+        });
 
         socket.on('close', () => {
 

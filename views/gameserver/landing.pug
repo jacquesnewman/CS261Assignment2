@@ -2,6 +2,11 @@ extends ../layout
 
 block body
     script.
+        var _session = {
+            session: "#{session.session}",
+            token: "#{session.token}",
+            id: "#{session.id}"
+        };
         let first = new Date().valueOf();
 
         const ws = new WebSocket('ws://steph-beeman.cs261.net:8008/game/testsocket');
@@ -11,5 +16,6 @@ block body
         }
 
         ws.onopen = function(event) {
+            ws.send("HELO" + _session.session + "|");
             console.log("Connected");
         }
