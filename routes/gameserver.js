@@ -17,13 +17,19 @@ function doTestSocket(req, res, next) {
 
 function doClient(req, res, next) {
     res.setHeader('Content-Type', 'text/html');
-    res.render('gameserver/client', { });
+    res.render('gameserver/client', { session: req.session });
+}
+
+function broadcast(msg) {
+    _server.clients.forEach( (client) => {
+        client.send(msg);
+    });
 }
 
 module.exports.register = (root, app, authMiddleware) => {
     _root = root;
 
-    app.all(_root, doClient);
+    app.all(_root, doClient, authMiddleware);
     app.all(_root + 'testsocket', doTestSocket);
 }
 
@@ -35,17 +41,12 @@ module.exports.listen = (server) => {
     _server.on('connection', (socket) => {
         first = new Date().valueOf();
 
-        console.log('CONNECTION ' + stringify(socket));
-
         socket.on('close', () => {
-            console.log('DISCONNECTION ' + stringify(socket));
+
         });
     });
 
     setInterval(() => {
-//        console.log("5");
-        _server.clients.forEach( (client) => {
-            client.send((new Date().valueOf()) - first);
-        });
+        broadcast((new Date().valueOf()) - first);
     }, 100);
 }

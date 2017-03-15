@@ -7,6 +7,7 @@ let express = require('express');
 let path = require('path');
 let logger = require('morgan');
 let bodyParser = require('body-parser');
+let cookieParser = require('cookie-parser');
 
 let auth = require('./utils/auth');
 let session = require('./models/session');
@@ -21,6 +22,7 @@ app.set('views', './views');
 
 app.use(logger(logLevel));
 app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(jsonUtils.requestMiddleware);
 app.use(jsonUtils.responseMiddleware);
 

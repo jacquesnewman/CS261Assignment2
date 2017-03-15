@@ -19,7 +19,16 @@ module.exports.middleware = function(req, res, next) {
     });
 }
 
-module.exports.authenticate = function(username, password, callback) {
+module.exports.authenticateSession = function(session, token, callback) {
+    sessions.findId(session, (err, found) => {
+        if (!found || found.token != token)
+            return callback("Not found");
+        else
+            return callback(null, found);
+    });
+}
+
+module.exports.authenticatePassword = function(username, password, callback) {
     users.findUsername(username, (err, found) => {
         if (err)
             return callback(err);
