@@ -12,7 +12,7 @@ let _server = null;
 
 function doTestSocket(req, res, next) {
     res.setHeader('Content-Type', 'text/html');
-    res.render('gameserver/landing', { });
+    res.render('gameserver/landing', { session: req.session });
 }
 
 function doClient(req, res, next) {
