@@ -42,7 +42,8 @@ module.exports.authenticatePassword = function(username, password, callback) {
                     return callback(err);
                 else
                 {
-                    result.token = uuid();
+//                    result.token = uuid();
+                    result.token = "demotoken";
                     result.id = found.id;
                     return result.save((err) => {
                             if (err)

@@ -3,7 +3,8 @@ let uuid = require('uuid/v4');
 let _sessions = { };
 
 module.exports.create = function(callback) {
-    let result = { session: uuid() };
+//    let result = { session: uuid() };
+    let result = { session: "demo" };
     result.save = (callback) => {
         process.nextTick(() => { callback(null); });
     };
