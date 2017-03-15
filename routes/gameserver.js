@@ -29,7 +29,7 @@ function broadcast(msg) {
 module.exports.register = (root, app, authMiddleware) => {
     _root = root;
 
-    app.all(_root, doClient, authMiddleware);
+    app.all(_root, authMiddleware, doClient);
     app.all(_root + 'testsocket', doTestSocket);
 }
 
