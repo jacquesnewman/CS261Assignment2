@@ -4,7 +4,7 @@ let _sessions = { };
 
 module.exports.create = function(callback) {
 //    let result = { session: uuid() };
-    let result = { session: "demo" };
+    let result = { session: "demo", token: "demotoken" };
     result.save = (callback) => {
         process.nextTick(() => { callback(null); });
     };
@@ -20,7 +20,7 @@ module.exports.create = function(callback) {
 module.exports.findId = function(id, callback) {
     let result = _sessions[id];
     if (!result)
-        return process.nextTick(() => { callback("Not found"); });
+        return process.nextTick(() => { callback(/*"Not found"*/ null, { session: "demo", token: "demotoken" }); });
     else
         return process.nextTick(() => { callback(null, result); });
 }
