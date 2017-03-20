@@ -28,10 +28,10 @@ app.use(jsonUtils.responseMiddleware);
 
 users.register('/users/', app, auth.middleware);
 gameserver.register('/game/', app, auth.middleware);
+gameserver.registerWebsockets(server);
 
 let server = app.listen(port, () => {
   console.log("Node app " + __filename + " is listening on port " + port + "!");
 });
-gameserver.listen(server);
 
 module.exports = app;
