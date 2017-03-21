@@ -20,5 +20,6 @@ block body
     script(src="/scripts/lib/require.js")
     script.
         requirejs(["/scripts/core/main.js"], function(main) {
-        main.begin(_session);
+            const ws = new WebSocket('ws://steph-beeman.cs261.net:8008/game/testsocket');
+            main.begin(_session, ws);
         });
