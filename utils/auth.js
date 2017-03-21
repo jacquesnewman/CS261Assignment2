@@ -22,12 +22,12 @@ module.exports.middleware = function(req, res, next) {
 
 module.exports.verifyToken = function(session, nonce, submission, callback) {
     sessions.findId(session, (err, found) => {
-        if (!found || found.token != token)
+        if (!found)
             callback(null, false);
         else
         {
             const hash = crypto.createHash('sha256');
-            hash.update('' + nonce + token + nonce);
+            hash.update('' + nonce + found.token + nonce);
 
             let result = hash.digest('hex');
             callback(null, result == submission);
