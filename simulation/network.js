@@ -10,7 +10,7 @@ module.exports.begin = (server, channelLayer) => {
 
     result.server.on('connection', (wtf) => {
         console.log('network.socket.onconnection ' + stringify(wtf));
-        console.log(Object.getPrototypeOf(wft));
+        console.log(Object.getPrototypeOf(wtf));
         wtf.send('blargh');
         let connection = {
             id: result.nextID,
