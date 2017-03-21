@@ -14,12 +14,11 @@ module.exports.begin = (server, channelLayer) => {
                 socket.send(message);
             },
 
-            isConnected: true,
-
-            channel: result.channelLayer.accept(connection)
+            isConnected: true
         };
         result.connections[connection.id] = connection;
         result.nextID += 1;
+        connection.channel = result.channelLayer.accept(connection);
 
         socket.on('message', (data, flags) => {
             connection.channel.onReceive(data);
