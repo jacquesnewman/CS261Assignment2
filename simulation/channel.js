@@ -78,13 +78,13 @@ module.exports.begin = (reliabilityLayer) => {
                 connection: connection,
                 state: StateEnum.Connected,
 
-                send: (message) => {
-                    connection.send(message);
+                send(message) {
+                    this.connection.send(message);
                 },
 
-                onReceive: (payload) => {
+                onReceive(payload) {
                     let message = payload;
-                    console.log(message);
+                    console.log(message + ' in state ' + this.state);
                     switch (this.state) {
                         case StateEnum.Authenticated:
                             inbound.push(message);
@@ -100,12 +100,12 @@ module.exports.begin = (reliabilityLayer) => {
                     }
                 },
 
-                onClose: () => {
+                onClose() {
                     this.state = StateEnum.Disconnected;
                     delete result.channels[this.id];
                 },
 
-                receive: () => {
+                receive() {
                     let received = inbound;
                     inbound = [ ];
                     return received;
