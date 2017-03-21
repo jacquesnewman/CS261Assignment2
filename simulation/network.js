@@ -7,36 +7,29 @@ module.exports.begin = (server, channelLayer) => {
     };
 
     result.server.on('connection', (socket) => {
-        let inbound = [ ];
-
         let connection = {
             id: result.nextID,
-
-            receive: () => {
-                let received = inbound;
-                inbound = [ ];
-                return received;
-            },
 
             send: (message) => {
                 socket.send(message);
             },
 
-            isConnected: true
+            isConnected: true,
+
+            channel: result.channelLayer.accept(connection)
         };
         result.connections[connection.id] = connection;
         result.nextID += 1;
 
         socket.on('message', (data, flags) => {
-            inbound.push(data);
+            connection.channel.onReceive(data);
         });
 
         socket.on('close', () => {
             connection.isConnected = false;
             delete result.connections[connection.id];
+            connection.channel.onClose();
         });
-
-        result.channelLayer.accept(connection);
     });
 
     return result;

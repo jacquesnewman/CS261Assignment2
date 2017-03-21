@@ -25,48 +25,58 @@ send events and state
  Application: Game logic
  */
 
+const StateEnum = {
+    Connected: 1,
+    Authenticated: 2,
+    Disconnected: -1
+};
+
 module.exports.begin = (reliabilityLayer) => {
     let result = {
         reliabilityLayer: reliabilityLayer,
+        channels: { },
 
         accept(connection) {
-            
+            let inbound = [ ];
+            let state = StateEnum.Connected;
+
+            let channel = {
+                id: connection.id,
+                connection: connection,
+
+                send: (message) => {
+                    connection.send(message);
+                },
+
+                onReceive: (message) => {
+                    switch (this.state) {
+                        case StateEnum.Joined:
+                            inbound.push(message);
+                            break;
+
+                        case StateEnum.Connected:
+                            // Check for auth then join
+                            break;
+
+                        default:
+                            // Ignore!
+                            break;
+                    }
+                },
+
+                onClose: () => {
+                    this.state = StateEnum.Disconnected;
+                    delete result.channels[this.id];
+                },
+
+                receive: () => {
+                    let received = inbound;
+                    inbound = [ ];
+                    return received;
+                }
+            };
+            result.channels[channel.id] = channel;
         }
     };
-
-    result.server.on('connection', (socket) => {
-        let inbound = [ ];
-
-        let connection = {
-            id: result.nextID,
-
-            receive: () => {
-                let received = inbound;
-                inbound = [ ];
-                return received;
-            },
-
-            send: (message) => {
-                socket.send(message);
-            },
-
-            isConnected: true
-        };
-        result.connections[connection.id] = connection;
-        result.nextID += 1;
-
-        socket.on('message', (data, flags) => {
-            inbound.push(data);
-        });
-
-        socket.on('close', () => {
-            connection.isConnected = false;
-            delete result.connections[connection.id];
-        });
-
-        result.channelLayer.accept(connection);
-    });
-
     return result;
 }
-

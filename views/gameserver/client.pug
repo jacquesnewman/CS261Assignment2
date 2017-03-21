@@ -17,4 +17,8 @@ block body
         };
     script(src='https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.2.2/pixi.min.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js')
-    script(data-main="/scripts/app" src="/scripts/lib/require.js")
+    script(src="/scripts/lib/require.js")
+    script.
+        requirejs(["/scripts/core/main.js"], function(main) {
+        main.begin(_session);
+        });
