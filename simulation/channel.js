@@ -42,7 +42,7 @@ function handleConnectionSequence(message, channel) {
             channel.sessionID = message.substr(4);
             if (!channel.nonce)
                 channel.nonce = Math.floor(Math.random() * 99999999) + 1;
-            channel.send('AUTH' + nonce);
+            channel.send('AUTH' + channel.nonce);
             break;
 
         case 'JOIN':
