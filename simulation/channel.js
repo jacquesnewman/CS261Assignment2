@@ -32,8 +32,6 @@ const StateEnum = {
 };
 
 function handleConnectionSequence(message, channel) {
-    console.log(message);
-
     if (message.length < 4)
         return;
 
@@ -84,7 +82,6 @@ module.exports.begin = (reliabilityLayer) => {
 
                 onReceive(payload) {
                     let message = payload;
-                    console.log(message + ' in state ' + this.state);
                     switch (this.state) {
                         case StateEnum.Authenticated:
                             inbound.push(message);
