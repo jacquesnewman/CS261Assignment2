@@ -31,6 +31,40 @@ const StateEnum = {
     Disconnected: -1
 };
 
+function handleConnectionSequence(message, channel) {
+    console.log(message);
+
+    if (message.length < 4)
+        return;
+
+    switch (message.substr(0, 4)) {
+        case 'HELO':
+            channel.sessionID = message.substr(4);
+            if (!channel.nonce)
+                channel.nonce = Math.floor(Math.random() * 99999999) + 1;
+            channel.send('AUTH' + nonce);
+            break;
+
+        case 'JOIN':
+            auth.verifyToken(channel.sessionID, channel.nonce, message.substr(4), (err, result) => {
+                if (result)
+                {
+                    channel.send('WLCM');
+                    // TODO
+                }
+                else
+                {
+                    console.log("BAD AUTH " + message.substr(4));
+                    channel.connection.close();
+                }
+            });
+            break;
+
+        default:
+            break;
+    }
+}
+
 module.exports.begin = (reliabilityLayer) => {
     let result = {
         reliabilityLayer: reliabilityLayer,
@@ -48,14 +82,15 @@ module.exports.begin = (reliabilityLayer) => {
                     connection.send(message);
                 },
 
-                onReceive: (message) => {
+                onReceive: (payload) => {
+                    let message = payload;
                     switch (this.state) {
                         case StateEnum.Joined:
                             inbound.push(message);
                             break;
 
                         case StateEnum.Connected:
-                            // Check for auth then join
+                            handleConnectionSequence(message, this.connection);
                             break;
 
                         default:
@@ -76,6 +111,8 @@ module.exports.begin = (reliabilityLayer) => {
                 }
             };
             result.channels[channel.id] = channel;
+
+            return channel;
         }
     };
     return result;

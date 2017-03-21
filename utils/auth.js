@@ -1,7 +1,8 @@
-let users = require('../models/user');
-let sessions = require('../models/session');
-let common = require('./common');
-let uuid = require('uuid/v4');
+const users = require('../models/user');
+const sessions = require('../models/session');
+const common = require('./common');
+const uuid = require('uuid/v4');
+const crypto = require('crypto');
 
 module.exports.middleware = function(req, res, next) {
     let authArgs = common.verifyArguments(req, [ "_session", "_token" ], [] );
@@ -15,6 +16,21 @@ module.exports.middleware = function(req, res, next) {
         else {
             req.session = found;
             return next();
+        }
+    });
+}
+
+module.exports.verifyToken = function(session, nonce, submission, callback) {
+    sessions.findId(session, (err, found) => {
+        if (!found || found.token != token)
+            callback(null, false);
+        else
+        {
+            const hash = crypto.createHash('sha256');
+            hash.update('' + nonce + token + nonce);
+
+            let result = hash.digest('hex');
+            callback(null, result == submission);
         }
     });
 }
