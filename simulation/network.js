@@ -8,6 +8,7 @@ module.exports.begin = (server, channelLayer) => {
 
     result.server.on('connection', (socket) => {
         console.log('network.socket.onconnection');
+        socket.send('blargh');
         let connection = {
             id: result.nextID,
 
