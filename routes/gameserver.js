@@ -1,9 +1,9 @@
-let networkLayer = require('./simulation/network');
-let channelLayer = require('./simulation/channel');
-let reliabilityLayer = require('./simulation/reliability');
-let prioritizationLayer = require('./simulation/prioritization');
-let replicationLayer = require('./simulation/replication');
-let realmLayer = require('./simulation/realm');
+let networkLayer = require('../simulation/network');
+let channelLayer = require('../simulation/channel');
+let reliabilityLayer = require('../simulation/reliability');
+let prioritizationLayer = require('../simulation/prioritization');
+let replicationLayer = require('../simulation/replication');
+let realmLayer = require('../simulation/realm');
 
 let _server = null;
 let _root = '/';
