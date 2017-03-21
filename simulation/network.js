@@ -13,7 +13,7 @@ module.exports.begin = (server, channelLayer) => {
         console.log('network.socket.onconnection');
         console.log(Object.getPrototypeOf(socket));
         socket.send('blargh');
-        
+
         let connection = {
             id: result.nextID,
 
@@ -27,6 +27,7 @@ module.exports.begin = (server, channelLayer) => {
         result.nextID += 1;
 
         socket.on('message', (data, flags) => {
+            socket.send('hey you said ' + data);
             console.log('network.socket.onmessage ' + data);
             connection.channel.onReceive(data);
         });
