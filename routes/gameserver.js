@@ -54,5 +54,5 @@ module.exports.registerWebsockets = (server) => {
     let prioritization = prioritizationLayer.begin(replication);
     let reliability = reliabilityLayer.begin(prioritization);
     let channel = channelLayer.begin(reliability);
-    let network = networkLayer.begin(server, channel);
+    let network = networkLayer.begin(_server, channel);
 }
