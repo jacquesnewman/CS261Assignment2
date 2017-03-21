@@ -1,4 +1,3 @@
-
-module.exports.accept = (connection) => {
-
+module.exports.begin = (realm) => {
+    return { };
 }
