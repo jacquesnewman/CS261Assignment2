@@ -72,11 +72,11 @@ module.exports.begin = (reliabilityLayer) => {
 
         accept(connection) {
             let inbound = [ ];
-            let state = StateEnum.Connected;
 
             let channel = {
                 id: connection.id,
                 connection: connection,
+                state: StateEnum.Connected,
 
                 send: (message) => {
                     connection.send(message);
