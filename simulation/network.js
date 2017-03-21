@@ -9,11 +9,6 @@ module.exports.begin = (server, channelLayer) => {
     };
 
     result.server.on('connection', (socket) => {
-        socket.send('blarghqweqwe');
-        console.log('network.socket.onconnection');
-        console.log(Object.getPrototypeOf(socket));
-        socket.send('blargh');
-
         let connection = {
             id: result.nextID,
 
@@ -39,7 +34,9 @@ module.exports.begin = (server, channelLayer) => {
             connection.channel.onClose();
         });
 
-        connection.channel = result.channelLayer.accept(connection);
+        socket.on('open', () => {
+            connection.channel = result.channelLayer.accept(connection);
+        });
     });
 
     return result;
