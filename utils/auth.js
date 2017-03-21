@@ -27,9 +27,11 @@ module.exports.verifyToken = function(session, nonce, submission, callback) {
         else
         {
             const hash = crypto.createHash('sha256');
-            hash.update('' + nonce + found.token + nonce);
+            let test = '' + nonce + found.token + nonce;
+            hash.update(test);
 
             let result = hash.digest('hex');
+            console.log('expect ' + result);
             callback(null, result == submission);
         }
     });
