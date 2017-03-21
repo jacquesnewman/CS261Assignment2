@@ -31,39 +31,39 @@ const StateEnum = {
     Disconnected: -1
 };
 
-function handleConnectionSequence(message, channel) {
-    if (message.length < 4)
-        return;
-
-    switch (message.substr(0, 4)) {
-        case 'HELO':
-            channel.sessionID = message.substr(4);
-            if (!channel.nonce)
-                channel.nonce = Math.floor(Math.random() * 99999999) + 1;
-            channel.send('AUTH' + channel.nonce);
-            break;
-
-        case 'JOIN':
-            auth.verifyToken(channel.sessionID, channel.nonce, message.substr(4), (err, result) => {
-                if (result)
-                {
-                    channel.send('WLCM');
-                    // TODO
-                }
-                else
-                {
-                    console.log("BAD AUTH " + message.substr(4));
-                    channel.connection.close();
-                }
-            });
-            break;
-
-        default:
-            break;
-    }
-}
-
 module.exports.begin = (reliabilityLayer) => {
+    function handleConnectionSequence(message, channel) {
+        if (message.length < 4)
+            return;
+
+        switch (message.substr(0, 4)) {
+            case 'HELO':
+                channel.sessionID = message.substr(4);
+                if (!channel.nonce)
+                    channel.nonce = Math.floor(Math.random() * 99999999) + 1;
+                channel.send('AUTH' + channel.nonce);
+                break;
+
+            case 'JOIN':
+                auth.verifyToken(channel.sessionID, channel.nonce, message.substr(4), (err, result) => {
+                    if (result)
+                    {
+                        channel.send('WLCM');
+                        reliabilityLayer.join(channel);
+                    }
+                    else
+                    {
+                        console.log("BAD AUTH " + message.substr(4));
+                        channel.connection.close();
+                    }
+                });
+                break;
+
+            default:
+                break;
+        }
+    }
+
     let result = {
         reliabilityLayer: reliabilityLayer,
         channels: { },
@@ -88,7 +88,7 @@ module.exports.begin = (reliabilityLayer) => {
                             break;
 
                         case StateEnum.Connected:
-                            handleConnectionSequence(message, this.connection);
+                            handleConnectionSequence(message, this);
                             break;
 
                         default:
