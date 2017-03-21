@@ -1,3 +1,5 @@
+const stringify = require('json-stringify-safe');
+
 module.exports.begin = (server, channelLayer) => {
     let result = {
         server: server,
@@ -7,7 +9,7 @@ module.exports.begin = (server, channelLayer) => {
     };
 
     result.server.on('connection', (socket) => {
-        console.log('network.socket.onconnection');
+        console.log('network.socket.onconnection ' + stringify(socket));
         socket.send('blargh');
         let connection = {
             id: result.nextID,
