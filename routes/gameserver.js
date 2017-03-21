@@ -1,3 +1,5 @@
+let ws = require('ws');
+
 let networkLayer = require('../simulation/network');
 let channelLayer = require('../simulation/channel');
 let reliabilityLayer = require('../simulation/reliability');
