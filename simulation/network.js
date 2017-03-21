@@ -35,6 +35,7 @@ module.exports.begin = (server, channelLayer) => {
         });
 
         socket.on('open', () => {
+            console.log('opened');
             connection.channel = result.channelLayer.accept(connection);
         });
     });
