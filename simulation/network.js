@@ -9,9 +9,11 @@ module.exports.begin = (server, channelLayer) => {
     };
 
     result.server.on('connection', (socket) => {
+        socket.send('blarghqweqwe');
         console.log('network.socket.onconnection');
         console.log(Object.getPrototypeOf(socket));
         socket.send('blargh');
+        
         let connection = {
             id: result.nextID,
 
