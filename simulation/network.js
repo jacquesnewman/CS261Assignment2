@@ -7,6 +7,7 @@ module.exports.begin = (server, channelLayer) => {
     };
 
     result.server.on('connection', (socket) => {
+        console.log('network.socket.onconnection');
         let connection = {
             id: result.nextID,
 
@@ -20,10 +21,12 @@ module.exports.begin = (server, channelLayer) => {
         result.nextID += 1;
 
         socket.on('message', (data, flags) => {
+            console.log('network.socket.onmessage ' + data);
             connection.channel.onReceive(data);
         });
 
         socket.on('close', () => {
+            console.log('network.socket.onclose');
             connection.isConnected = false;
             delete result.connections[connection.id];
             connection.channel.onClose();
