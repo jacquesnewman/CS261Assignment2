@@ -36,6 +36,7 @@ module.exports.verifyToken = function(session, nonce, submission, callback) {
             console.log(JSON.stringify(found));
 
             let result = hash.digest('hex');
+            console.log(result);
             callback(null, found.id);
         }
     });
