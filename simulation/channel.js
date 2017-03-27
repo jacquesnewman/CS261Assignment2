@@ -1,4 +1,6 @@
 let auth = require('../utils/auth');
+const stringify = require('json-stringify-safe');
+
 
 /*
  The Channel layer is responsible for maintaining connection state.
@@ -69,6 +71,9 @@ module.exports.begin = (reliabilityLayer) => {
         channels: { },
 
         accept(connection) {
+            console.log(typeof connection);
+            console.log(stringify(connection));
+            
             let inbound = [ ];
 
             let channel = {
