@@ -16,7 +16,11 @@ module.exports.begin = (server, channelLayer) => {
                 socket.send(message);
             },
 
-            isConnected: true
+            isConnected: true,
+
+            close: () => {
+                socket.close();
+            }
         };
         result.connections[connection.id] = connection;
         result.nextID += 1;
