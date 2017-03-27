@@ -20,7 +20,7 @@ module.exports.create = function(callback) {
 module.exports.findId = function(id, callback) {
     let result = _sessions[id];
     if (!result)
-        return process.nextTick(() => { callback(/*"Not found"*/ null, { session: "demo", token: "demotoken" }); });
+        return process.nextTick(() => { callback(/*"Not found"*/ null, { session: "demo", token: "demotoken", id: "bogus" }); });
     else
         return process.nextTick(() => { callback(null, result); });
 }

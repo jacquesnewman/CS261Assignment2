@@ -24,7 +24,6 @@ module.exports.verifyToken = function(session, nonce, submission, callback) {
     sessions.findId(session, (err, found) => {
         if (!found)
         {
-            console.log("!found");
             callback(null, false);
         }
         else
@@ -33,16 +32,11 @@ module.exports.verifyToken = function(session, nonce, submission, callback) {
             let test = '' + nonce + found.token + nonce;
             hash.update(test);
 
-            console.log(JSON.stringify(found));
-
             let result = hash.digest('hex');
-            console.log('         ' + result);
-            console.log('         ' + submission);
             if (result == submission)
                 callback(null, found.id);
             else
                 callback(null, false);
-            callback(null, found.id);
         }
     });
 }
