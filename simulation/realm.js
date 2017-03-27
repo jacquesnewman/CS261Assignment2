@@ -51,7 +51,7 @@ module.exports.allRealms = () => {
 
 module.exports.begin = () => {
     let realm = getRealm("default");
-    realm.simulation = simulation.begin(realm);
+    realm.frameHandling = frameHandling.begin(realm);
 
     return realm;
 }
