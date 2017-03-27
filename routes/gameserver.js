@@ -3,7 +3,6 @@ let ws = require('ws');
 let networkLayer = require('../simulation/network');
 let channelLayer = require('../simulation/channel');
 let reliabilityLayer = require('../simulation/reliability');
-let prioritizationLayer = require('../simulation/prioritization');
 let replicationLayer = require('../simulation/replication');
 let realmLayer = require('../simulation/realm');
 
