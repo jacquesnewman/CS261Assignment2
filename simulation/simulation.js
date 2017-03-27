@@ -1,14 +1,17 @@
-module.exports.begin = (realm) => {
+module.exports.begin = () => {
     let result = {
-        frame: 0,
-        fps: 10,
+        processInput(messages) {
 
-        gameloop() {
-            this.frame += 1;
+        },
+
+        advanceSimulation(interval) {
+
+        },
+
+        assembleFrame() {
+            return { };
         }
     };
-
-    setInterval(result.gameloop, 1000 / result.fps);
 
     return result;
 }

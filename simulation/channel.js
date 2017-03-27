@@ -72,6 +72,10 @@ module.exports.begin = (reliabilityLayer) => {
             let inbound = [ ];
 
             let channel = {
+                getID() {
+                    return this.id;
+                },
+
                 id: connection.id,
                 connection: connection,
                 state: StateEnum.Connected,
@@ -106,6 +110,10 @@ module.exports.begin = (reliabilityLayer) => {
                     let received = inbound;
                     inbound = [ ];
                     return received;
+                },
+
+                disconnect() {
+                    return connection.close();
                 }
             };
             result.channels[channel.id] = channel;

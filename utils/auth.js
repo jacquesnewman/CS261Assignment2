@@ -31,7 +31,7 @@ module.exports.verifyToken = function(session, nonce, submission, callback) {
             hash.update(test);
 
             let result = hash.digest('hex');
-            callback(null, result == submission);
+            callback(null, found.id);
         }
     });
 }

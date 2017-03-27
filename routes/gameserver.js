@@ -51,8 +51,7 @@ module.exports.registerWebsockets = (server) => {
 
     let realm = realmLayer.begin();
     let replication = replicationLayer.begin(realm);
-    let prioritization = prioritizationLayer.begin(replication);
-    let reliability = reliabilityLayer.begin(prioritization);
+    let reliability = reliabilityLayer.begin(replication);
     let channel = channelLayer.begin(reliability);
     let network = networkLayer.begin(_server, channel);
 }
