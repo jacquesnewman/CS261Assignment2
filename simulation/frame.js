@@ -14,7 +14,7 @@ module.exports.begin = (realm) => {
         }
     };
 
-    setInterval(result.gameloop, 1000 / result.fps);
+    setInterval(() => { result.gameloop(); }, 1000 / result.fps);
 
     return result;
 }
