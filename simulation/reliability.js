@@ -30,7 +30,6 @@ module.exports.begin = (replicationLayer) => {
 
                 receive() {
                     let messages = channel.receive();
-                    console.log(JSON.stringify(messages));
                     let inbound = [ ];
                     for (let i = 0; i < messages.length; i++)
                     {
