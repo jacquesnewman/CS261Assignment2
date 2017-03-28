@@ -88,6 +88,7 @@ module.exports.begin = (reliabilityLayer) => {
 
                 onReceive(payload) {
                     let message = payload;
+                    console.log(message);
                     switch (this.state) {
                         case StateEnum.Authenticated:
                             inbound.push(message);

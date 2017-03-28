@@ -38,7 +38,6 @@ module.exports.begin = (server, channelLayer) => {
         result.nextID += 1;
 
         socket.on('message', (data, flags) => {
-            console.log(data);
             connection.channel.onReceive(data);
         });
 
