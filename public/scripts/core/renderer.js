@@ -70,7 +70,7 @@ define(function(require) {
                 let sprite = getSprite(obj);
                 sprite.position.x = obj.pos.x + screenOrigin.x;
                 sprite.position.y = obj.pos.y + screenOrigin.y;
-                sprite.rotation = obj.rot;
+                sprite.rotation = obj.rot * (Math.PI / 180);
             });
         }
     };

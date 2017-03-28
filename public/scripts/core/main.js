@@ -2,11 +2,6 @@ define(function(require) {
     return {
         begin(config, socket) {
             socket.onopen = function(event) {
-
-                console.log("made it!");
-                console.log(JSON.stringify(config));
-                console.log(socket);
-
                 require([   './renderer.js',
                         './network.js',
                         './keyboard.js',
@@ -42,23 +37,27 @@ define(function(require) {
                                 }
                                 });
 
-                                const desiredRate = 1 / 60;
-                                let remainingTime = 0;
+                                const desiredRate = 1 / 10;
+                                let targetTime = 0;
 
                                 requestAnimationFrame( animate );
 
-                                function animate(elapsedTime) {
+                                function animate(curTime) {
                                     requestAnimationFrame( animate );
 
-                                    remainingTime -= elapsedTime;
-                                    if (remainingTime <= 0) {
+                                    let togo = 1.0 - ((targetTime - curTime) / (desiredRate * 1000));
+
+                                    if (curTime >= targetTime)
+                                    {
+                                        togo = -1;
+                                        
                                         // Get and send keyboard input
                                         let state = keyboard.getState();
                                         network.sendControls(state);
-                                        remainingTime = desiredRate;
+                                        targetTime = curTime + (desiredRate * 1000);
                                     }
 
-                                    renderer.draw(network.nextFrame());
+                                    renderer.draw(network.nextFrame(togo));
 
                                     canvas.render(stage);
                                 }
