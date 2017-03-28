@@ -12,6 +12,7 @@ function getRealm(realmID) {
         clients: { },
 
         join(replication) {
+            replication.send('hi there');
             let existing = getClient(client.userid);
             if (existing && existing !== client)
             {
@@ -19,7 +20,6 @@ function getRealm(realmID) {
             }
 
             this.clients[replication.getID()] = replication;
-            replication.send('hi there');
         },
 
         collect() {

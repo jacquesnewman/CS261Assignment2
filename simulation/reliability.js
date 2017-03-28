@@ -3,6 +3,7 @@ module.exports.begin = (replicationLayer) => {
         replicationLayer: replicationLayer,
 
         join(channel) {
+            channel.send('reliability');
             channel.reliability = {
                 layer: this,
                 channel: channel,
@@ -76,5 +77,7 @@ module.exports.begin = (replicationLayer) => {
             replicationLayer.join(channel.reliability);
         }
     };
+
+    return result;
 }
 

@@ -3,6 +3,7 @@ module.exports.begin = (realm) => {
         realm: realm,
 
         join(reliability) {
+            reliability.send('replication');
             reliability.replication = {
                 layer: this,
                 realm: realm,
@@ -35,5 +36,7 @@ module.exports.begin = (realm) => {
             realm.join(reliability.replication);
         }
     };
+
+    return result;
 }
 
