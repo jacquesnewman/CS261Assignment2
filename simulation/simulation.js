@@ -159,7 +159,6 @@ module.exports.begin = (frameRate) => {
                 let stats = getStats(ship.type);
                 let controls = ship.controls;
 
-
                 if (controls.LEFT)
                 {
                     console.log(JSON.stringify(ship));
@@ -172,9 +171,14 @@ module.exports.begin = (frameRate) => {
                 ship.rot = normalizeAngle(ship.rot);
 
                 let pos = new Vec2D(ship.pos);
-                let v = new Vec2D(ship.v);
+                console.log(JSON.stringify(pos));
+                console.log(JSON.stringify(pos.stripped()));
+                
+                //let pos = new Vec2D(ship.pos);
 
                 /*
+                 let v = new Vec2D(ship.v);
+
                 if (controls.THRUST)
                 {
                     let accel = normalVectorFromAngle(ship.rot).times(stats.thrust * interval);
@@ -185,6 +189,7 @@ module.exports.begin = (frameRate) => {
                 pos = pos.plus(v.times(interval));
 
                 ship.v = v.stripped();*/
+
                 ship.pos = pos.stripped();
             });
         },
