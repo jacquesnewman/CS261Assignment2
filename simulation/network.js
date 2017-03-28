@@ -19,11 +19,11 @@ module.exports.begin = (server, channelLayer) => {
             id: result.nextID,
 
             send: (message) => {
-                console.log(message);
-                if (socket.writable)
+//                console.log(message);
+//                if (socket.writable)
                     socket.send(message);
-                else
-                    console.log('fail');
+//                else
+//                    console.log('fail');
             },
 
             isConnected: true,
