@@ -1,7 +1,5 @@
 const stringify = require('json-stringify-safe');
 
-//"MOVE{\"THRUST\":{\"down\":false,\"held\":false,\"released\":false},\"LEFT\":{\"down\":false,\"held\":false,\"released\":false},\"RIGHT\":{\"down\":false,\"held\":false,\"released\":false},\"FIRE\":{\"down\":false,\"held\":false,\"released\":false}}"]
-
 module.exports.begin = (frameRate) => {
     let _ships = { };
     let _stats = { };
@@ -173,9 +171,10 @@ module.exports.begin = (frameRate) => {
                     ship.rot += interval * stats.rotationRate;
                 ship.rot = normalizeAngle(ship.rot);
 
-                /*let pos = new Vec2D(ship.pos);
+                let pos = new Vec2D(ship.pos);
                 let v = new Vec2D(ship.v);
 
+                /*
                 if (controls.THRUST)
                 {
                     let accel = normalVectorFromAngle(ship.rot).times(stats.thrust * interval);
@@ -185,8 +184,8 @@ module.exports.begin = (frameRate) => {
 
                 pos = pos.plus(v.times(interval));
 
-                ship.v = v.stripped();
-                ship.pos = pos.stripped();*/
+                ship.v = v.stripped();*/
+                ship.pos = pos.stripped();
             });
         },
 
