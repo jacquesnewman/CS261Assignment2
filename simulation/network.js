@@ -28,6 +28,7 @@ module.exports.begin = (server, channelLayer) => {
                 socket.close();
             }
         };
+        let fallback = connection;
         result.connections[connection.id] = connection;
         result.nextID += 1;
 
@@ -36,11 +37,11 @@ module.exports.begin = (server, channelLayer) => {
         });
 
         socket.on('error', (error) => {
-            end(connection);
+            end(fallback);
         });
 
         socket.on('close', () => {
-            end(connection);
+            end(fallback);
         });
 
         connection.channel = result.channelLayer.accept(connection);
