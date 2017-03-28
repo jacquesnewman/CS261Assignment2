@@ -13,7 +13,7 @@ function getRealm(realmID) {
 
         join(replication) {
             let newid = replication.getID();
-            let existing = getClient(newid);
+            let existing = this.getClient(newid);
             if (existing && existing !== client)
             {
                 existing.disconnect();
