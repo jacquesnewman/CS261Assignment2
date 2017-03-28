@@ -194,7 +194,7 @@ module.exports.begin = (frameRate) => {
             for (let i = 0; i < ships.length; i++)
                 result.push(strip(ships[i]));
 
-            return result;
+            return { objects: result };
         }
     };
 
