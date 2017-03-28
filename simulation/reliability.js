@@ -15,15 +15,18 @@ module.exports.begin = (replicationLayer) => {
                 },
 
                 send(message, frameNumber) {
+                    let payload = message;
+
                     if (frameNumber)
                     {
                         if (!this.frameSendTimes[frameNumber])
                         {
                             this.frameSendTimes[frameNumber] =  process.hrtime();
                         }
+                        payload = '' + frameNumber + '|' + message;
                     }
 
-                    channel.send('' + frameNumber + '|' + message);
+                    channel.send(payload);
                 },
 
                 receive() {

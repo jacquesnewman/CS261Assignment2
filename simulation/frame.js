@@ -9,7 +9,9 @@ module.exports.begin = (realm) => {
         gameloop() {
             this.simulation.processInput(realm.collect());
             this.simulation.advanceSimulation(1000 / this.fps);
-            realm.broadcast(this.simulation.assembleFrame(), this.frameNum);
+            let curFrame = this.simulation.assembleFrame();
+            curFrame.frameNumber = this.frameNum;
+            realm.broadcast(curFrame);
             this.frameNum += 1;
         }
     };

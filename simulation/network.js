@@ -9,7 +9,6 @@ module.exports.begin = (server, channelLayer) => {
     };
 
     function end(connection) {
-        console.log('closing ' + stringify(connection));
         connection.isConnected = false;
         delete result.connections[connection.id];
         connection.channel.onClose();

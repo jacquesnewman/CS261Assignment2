@@ -20,7 +20,6 @@ function getRealm(realmID) {
             }
 
             this.clients[newid] = replication;
-            replication.send('you are ' + newid);
         },
 
         collect() {
@@ -32,10 +31,10 @@ function getRealm(realmID) {
             return results;
         },
 
-        broadcast(frame, frameNumber) {
+        broadcast(frame) {
             for (let id in this.clients)
             {
-                this.clients[id].sendFrame(frame, frameNumber);
+                this.clients[id].sendFrame(frame);
             }
         },
 
