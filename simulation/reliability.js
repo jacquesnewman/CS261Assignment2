@@ -53,7 +53,7 @@ module.exports.begin = (replicationLayer) => {
                                         this.ping -= this.ping / 5;     // Rolling average over 5 frames
                                         this.ping += curPing / 5;
 
-                                        console.log(this.ping);
+                                        console.log('frame ' + frame + ' ping = ' + this.ping);
                                     }
                                 }
 
