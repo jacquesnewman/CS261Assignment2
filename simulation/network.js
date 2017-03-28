@@ -20,7 +20,7 @@ module.exports.begin = (server, channelLayer) => {
 
             send: (message) => {
                     socket.send(message, (error) => {
-                        console.log(error);
+                        end(this);
                     });
             },
 
