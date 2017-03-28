@@ -51,6 +51,7 @@ module.exports.begin = (reliabilityLayer) => {
                     if (result)
                     {
                         channel.send('WLCM');
+                        channel.state = StateEnum.Authenticated;
                         reliabilityLayer.join(channel);
                     }
                     else
