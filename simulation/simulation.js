@@ -7,7 +7,7 @@ module.exports.begin = () => {
             {
                 let messages = clients[key].messages;
                 if (messages && messages.length > 0)
-                    console.log(stringify(messages));
+                    console.log(clients[key].id + ' => ' + stringify(messages));
             }
         },
 
