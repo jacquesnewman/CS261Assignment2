@@ -17,10 +17,13 @@ module.exports.begin = (server, channelLayer) => {
     result.server.on('connection', (socket) => {
         let connection = {
             id: result.nextID,
+            errorCount: 0,
 
             send: (message) => {
                     socket.send(message, (error) => {
-                        end(this);
+                        this.errorCount += 1;
+                        if (this.errorCount > 10)
+                            end(this);
                     });
             },
 
