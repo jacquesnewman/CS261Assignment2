@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>pixi.js example 1</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.2.2/pixi.min.js"></script>
+</head>
+<body>
+<script src="scripts/lib/require.js"></script>
+<script>
+    requirejs(["/scripts/core/main.js"], function(main) {
+        main.begin({ bogus: "foo" });
+    });
+</script>
+</body>

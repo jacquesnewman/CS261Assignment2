@@ -41,7 +41,7 @@ function doLogin(req, res, next) {
     if (args.status != "success")
         return common.sendJSON(res, args);
 
-    auth.authenticate(args.data.username, args.data.password, (err, session) => {
+    auth.authenticatePassword(args.data.username, args.data.password, (err, session) => {
         if (err == "Unauthorized")
             return common.sendJSON(res, { status: "fail", reason: "Username/password mismatch" });
         else if (err)

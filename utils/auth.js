@@ -1,7 +1,8 @@
-let users = require('../models/user');
-let sessions = require('../models/session');
-let common = require('./common');
-let uuid = require('uuid/v4');
+const users = require('../models/user');
+const sessions = require('../models/session');
+const common = require('./common');
+const uuid = require('uuid/v4');
+const crypto = require('crypto');
 
 module.exports.middleware = function(req, res, next) {
     let authArgs = common.verifyArguments(req, [ "_session", "_token" ], [] );
@@ -19,7 +20,37 @@ module.exports.middleware = function(req, res, next) {
     });
 }
 
-module.exports.authenticate = function(username, password, callback) {
+module.exports.verifyToken = function(session, nonce, submission, callback) {
+    sessions.findId(session, (err, found) => {
+        if (!found)
+        {
+            callback(null, false);
+        }
+        else
+        {
+            const hash = crypto.createHash('sha256');
+            let test = '' + nonce + found.token + nonce;
+            hash.update(test);
+
+            let result = hash.digest('hex');
+            if (result == submission)
+                callback(null, found.id);
+            else
+                callback(null, false);
+        }
+    });
+}
+
+module.exports.authenticateSession = function(session, token, callback) {
+    sessions.findId(session, (err, found) => {
+        if (!found || found.token != token)
+            return callback("Not found");
+        else
+            return callback(null, found);
+    });
+}
+
+module.exports.authenticatePassword = function(username, password, callback) {
     users.findUsername(username, (err, found) => {
         if (err)
             return callback(err);
@@ -33,7 +64,8 @@ module.exports.authenticate = function(username, password, callback) {
                     return callback(err);
                 else
                 {
-                    result.token = uuid();
+//                    result.token = uuid();
+                    result.token = "demotoken";
                     result.id = found.id;
                     return result.save((err) => {
                             if (err)

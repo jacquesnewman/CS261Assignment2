@@ -8,7 +8,7 @@
     "type": "git",
     "url": "git://github.com/stebee/CS261Assignment2.git"
   },
-  "author": "Stephen Beeman",
+  "author": "Steph Beeman",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/stebee/CS261Assignment2/issues"
@@ -21,6 +21,10 @@
     "express": "~4.14.1",
     "moment": "*",
     "morgan": "~1.7.0",
-    "uuid": "^3.0.1"
+    "pug": "^2.0.0-beta11",
+    "uuid": "^3.0.1",
+    "ws": "^1.1.3",
+    "json-stringify-safe": "*",
+    "cookie-parser": "*"
   }
 }
