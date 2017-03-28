@@ -188,7 +188,7 @@ module.exports.begin = (frameRate) => {
 
                 ship.v = v.stripped();*/
 
-                ship.pos = pos.stripped();
+                //ship.pos = pos.stripped();
             });
         },
 
