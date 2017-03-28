@@ -179,7 +179,7 @@ module.exports.begin = (frameRate) => {
                     v = v.plus(accel);
                     console.log('v ' + JSON.stringify(v));
 
-                    v = v.normalized(stats.limit);
+//                    v = v.normalized(stats.limit);
                 }
 
                 pos = pos.plus(v.times(interval));
