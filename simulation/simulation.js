@@ -170,12 +170,9 @@ module.exports.begin = (frameRate) => {
                     ship.rot += interval * stats.rotationRate;
                 ship.rot = normalizeAngle(ship.rot);
 
-                console.log(JSON.stringify(new Vec2D(ship.pos)));
+                let pos = new Vec2D(ship.pos);
 
-                //let pos =
-
-                /*
-                 let v = new Vec2D(ship.v);
+                let v = new Vec2D(ship.v);
 
                 if (controls.THRUST)
                 {
@@ -186,9 +183,8 @@ module.exports.begin = (frameRate) => {
 
                 pos = pos.plus(v.times(interval));
 
-                ship.v = v.stripped();*/
-
-                //ship.pos = pos.stripped();
+                ship.v = v.stripped();
+                ship.pos = pos.stripped();
             });
         },
 
