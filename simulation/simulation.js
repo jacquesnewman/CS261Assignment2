@@ -5,8 +5,9 @@ module.exports.begin = () => {
         processInput(clients) {
             for (let key in clients)
             {
-                if (clients[key].messages)
-                    console.log(stringify(clients[key].messages));
+                let messages = clients[key].messages;
+                if (messages && messages.length > 0)
+                    console.log(stringify(messages));
             }
         },
 
