@@ -90,7 +90,7 @@ module.exports.begin = (frameRate) => {
     };
 
     function Vec2D(x, y) {
-        if (!y && x.x && x.y)
+        if (y === undefined)
         {
             this.x = x.x;
             this.y = x.y;
