@@ -8,7 +8,7 @@ module.exports.begin = (server, channelLayer) => {
         connections: { }
     };
 
-    function end() {
+    function end(connection) {
         connection.isConnected = false;
         delete result.connections[connection.id];
         connection.channel.onClose();
@@ -36,11 +36,11 @@ module.exports.begin = (server, channelLayer) => {
         });
 
         socket.on('error', (error) => {
-            end();
+            end(connection);
         });
 
         socket.on('close', () => {
-            end();
+            end(connection);
         });
 
         connection.channel = result.channelLayer.accept(connection);
