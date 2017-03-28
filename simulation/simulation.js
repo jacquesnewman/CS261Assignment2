@@ -161,13 +161,15 @@ module.exports.begin = (frameRate) => {
                 let stats = getStats(ship.type);
                 let controls = ship.controls;
 
+                console.log(JSON.stringify(ship));
+
                 if (controls.LEFT)
                     ship.rot -= interval * stats.rotationRate;
                 if (controls.RIGHT)
                     ship.rot += interval * stats.rotationRate;
                 ship.rot = normalizeAngle(ship.rot);
 
-                let pos = new Vec2D(ship.pos);
+                /*let pos = new Vec2D(ship.pos);
                 let v = new Vec2D(ship.v);
 
                 if (controls.THRUST)
@@ -180,7 +182,7 @@ module.exports.begin = (frameRate) => {
                 pos = pos.plus(v.times(interval));
 
                 ship.v = v.stripped();
-                ship.pos = pos.stripped();
+                ship.pos = pos.stripped();*/
             });
         },
 
