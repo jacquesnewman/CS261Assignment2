@@ -37,6 +37,7 @@ module.exports.begin = (replicationLayer) => {
                         let message = messages[i];
                         if (messages[i].substr(0,4) == 'MOVE')
                         {
+                            console.log(messages[i]);
                             let payload = inbound[i].substr(4).split('|', 1);
                             message = 'MOVE' + payload[1];
                             let acked = Number(payload[0]);
