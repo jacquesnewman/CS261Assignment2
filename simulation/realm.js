@@ -20,6 +20,7 @@ function getRealm(realmID) {
             }
 
             this.clients[newid] = replication;
+            replication.send('you are ' + newid);
         },
 
         collect() {
