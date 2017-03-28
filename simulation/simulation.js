@@ -35,7 +35,7 @@ module.exports.begin = (frameRate) => {
                 id: 'player' + id,
                 type: 'blueShip',
                 pos: { x: 100, y: 100 },
-                v: { x: 1, y: 1 },
+                v: { x: 0, y: 0 },
                 rot: 0,
                 controls: makeControls()
             }
@@ -126,7 +126,7 @@ module.exports.begin = (frameRate) => {
 
     function normalVectorFromAngle(angle) {
         let radians = deg2Rad(angle);
-        return new Vec2D(-Math.sin(radians), Math.cos(radians));
+        return new Vec2D(Math.sin(radians), Math.cos(radians));
     }
 
     let result = {
