@@ -19,8 +19,8 @@ module.exports.begin = (frameRate) => {
         {
             result = {
                 rotationRate: 120,
-                thrust: 12,
-                limit: 25
+                thrust: 25,
+                limit: 35
             };
             _stats[type] = result;
         }
