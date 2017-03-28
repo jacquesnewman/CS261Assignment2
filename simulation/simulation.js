@@ -20,7 +20,7 @@ module.exports.begin = (frameRate) => {
         if (!result)
         {
             result = {
-                rotationRate: 5,
+                rotationRate: 120,
                 thrust: 5,
                 limit: 25
             };
