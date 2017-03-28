@@ -23,7 +23,7 @@ module.exports.begin = (replicationLayer) => {
                         }
                     }
 
-                    channel.send(message);
+                    channel.send('' + frameNumber + '|' + message);
                 },
 
                 receive() {

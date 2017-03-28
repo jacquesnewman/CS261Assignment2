@@ -8,6 +8,12 @@ module.exports.begin = (server, channelLayer) => {
         connections: { }
     };
 
+    function end() {
+        connection.isConnected = false;
+        delete result.connections[connection.id];
+        connection.channel.onClose();
+    }
+
     result.server.on('connection', (socket) => {
         let connection = {
             id: result.nextID,
@@ -29,10 +35,12 @@ module.exports.begin = (server, channelLayer) => {
             connection.channel.onReceive(data);
         });
 
+        socket.on('error', (error) => {
+            end();
+        });
+
         socket.on('close', () => {
-            connection.isConnected = false;
-            delete result.connections[connection.id];
-            connection.channel.onClose();
+            end();
         });
 
         connection.channel = result.channelLayer.accept(connection);
