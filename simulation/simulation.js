@@ -161,15 +161,17 @@ module.exports.begin = (frameRate) => {
                 let stats = getStats(ship.type);
                 let controls = ship.controls;
 
-                console.log(JSON.stringify(ship));
 
                 if (controls.LEFT)
+                {
+                    console.log(JSON.stringify(ship));
                     ship.rot -= interval * stats.rotationRate;
+                    console.log(interval);
+                    console.log(stats.rotationRate);
+                }
                 if (controls.RIGHT)
                     ship.rot += interval * stats.rotationRate;
                 ship.rot = normalizeAngle(ship.rot);
-
-                console.log(JSON.stringify(ship));
 
                 /*let pos = new Vec2D(ship.pos);
                 let v = new Vec2D(ship.v);
