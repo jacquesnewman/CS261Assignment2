@@ -20,7 +20,7 @@ module.exports.begin = (server, channelLayer) => {
 
             send: (message) => {
                 if (!socket.writable)
-                    console.log('BAD ' + connection.id);
+                    console.log('BAD ' + connection.id + JSON.stringify(Object.keys(result.connections)));
                 else
                     socket.send(message);
             },
