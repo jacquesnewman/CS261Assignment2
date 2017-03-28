@@ -23,7 +23,6 @@ module.exports.begin = (replicationLayer) => {
                         {
                             this.frameSendTimes[frameNumber] =  process.hrtime();
                         }
-                        payload = '' + frameNumber + '|' + message;
                     }
 
                     channel.send(payload);
