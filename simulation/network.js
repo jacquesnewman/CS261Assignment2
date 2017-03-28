@@ -19,6 +19,7 @@ module.exports.begin = (server, channelLayer) => {
             id: result.nextID,
 
             send: (message) => {
+                console.log(socket.isConnected);
                 socket.send(message);
             },
 
