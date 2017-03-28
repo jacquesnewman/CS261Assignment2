@@ -30,13 +30,12 @@ module.exports.begin = (replicationLayer) => {
 
                 receive() {
                     let messages = channel.receive();
-                    let inbound = [ ];
                     for (let i = 0; i < messages.length; i++)
                     {
                         let message = messages[i];
                         if (message.substr(0,4) == 'MOVE')
                         {
-                            let payload = inbound[i].substr(4).split('|', 1);
+                            let payload = message.substr(4).split('|', 1);
                             message = 'MOVE' + payload[1];
                             let acked = Number(payload[0]);
                             if (acked)
