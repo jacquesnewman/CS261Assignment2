@@ -3,7 +3,6 @@ module.exports.begin = (realm) => {
         realm: realm,
 
         join(reliability) {
-            reliability.send('replication');
             reliability.replication = {
                 layer: this,
                 realm: realm,
@@ -16,6 +15,7 @@ module.exports.begin = (realm) => {
                     let payload = 'FRAM';
                     
                     // Serialize frame and append to payload
+                    payload += JSON.stringify(frame);
 
                     reliability.send(payload, frame.frameNumber);
                 },

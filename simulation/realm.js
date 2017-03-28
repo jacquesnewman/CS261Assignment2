@@ -12,14 +12,14 @@ function getRealm(realmID) {
         clients: { },
 
         join(replication) {
-            replication.send('hi there');
-            let existing = getClient(client.userid);
+            let newid = replication.getID();
+            let existing = getClient(newid);
             if (existing && existing !== client)
             {
                 existing.disconnect();
             }
 
-            this.clients[replication.getID()] = replication;
+            this.clients[newid] = replication;
         },
 
         collect() {

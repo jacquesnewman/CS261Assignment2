@@ -71,9 +71,6 @@ module.exports.begin = (reliabilityLayer) => {
         channels: { },
 
         accept(connection) {
-            console.log(typeof connection);
-            console.log(stringify(connection));
-            
             let inbound = [ ];
 
             let channel = {
