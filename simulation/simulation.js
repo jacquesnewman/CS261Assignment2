@@ -179,6 +179,8 @@ module.exports.begin = (frameRate) => {
                     let accel = normalVectorFromAngle(ship.rot).times(stats.thrust * interval);
                     v = v.plus(accel);
                     v = v.normalized(stats.limit);
+
+                    console.log(accel);
                 }
 
                 pos = pos.plus(v.times(interval));
