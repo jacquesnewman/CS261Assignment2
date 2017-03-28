@@ -19,6 +19,7 @@ function getRealm(realmID) {
             }
 
             this.clients[replication.getID()] = replication;
+            replication.send('hi there');
         },
 
         collect() {
