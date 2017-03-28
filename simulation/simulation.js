@@ -160,12 +160,7 @@ module.exports.begin = (frameRate) => {
                 let controls = ship.controls;
 
                 if (controls.LEFT)
-                {
-                    console.log(JSON.stringify(ship));
                     ship.rot -= interval * stats.rotationRate;
-                    console.log(interval);
-                    console.log(stats.rotationRate);
-                }
                 if (controls.RIGHT)
                     ship.rot += interval * stats.rotationRate;
                 ship.rot = normalizeAngle(ship.rot);
@@ -176,11 +171,15 @@ module.exports.begin = (frameRate) => {
 
                 if (controls.THRUST)
                 {
-                    let accel = normalVectorFromAngle(ship.rot).times(stats.thrust * interval);
-                    v = v.plus(accel);
-                    v = v.normalized(stats.limit);
-
+                    let dir = normalVectorFromAngle(ship.rot);
+                    console.log(dir);
+                    let accel = dir.times(stats.thrust * interval);
                     console.log(accel);
+
+                    v = v.plus(accel);
+                    console.log(v);
+                    
+                    v = v.normalized(stats.limit);
                 }
 
                 pos = pos.plus(v.times(interval));
