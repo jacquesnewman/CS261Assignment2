@@ -1,10 +1,12 @@
 let simulation = require('./simulation');
 
 module.exports.begin = (realm) => {
+    const fps = 10;
+
     let result = {
-        simulation: simulation.begin(),
+        simulation: simulation.begin(1 / fps),
         frameNum: 1,
-        fps: 10,
+        fps: fps,
 
         gameloop() {
             this.simulation.processInput(realm.collect());
