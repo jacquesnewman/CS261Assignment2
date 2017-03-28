@@ -172,13 +172,13 @@ module.exports.begin = (frameRate) => {
                 if (controls.THRUST)
                 {
                     let dir = normalVectorFromAngle(ship.rot);
-                    console.log(dir);
+                    console.log('dir ' + dir);
                     let accel = dir.times(stats.thrust * interval);
-                    console.log(accel);
+                    console.log('accel ' + accel);
 
                     v = v.plus(accel);
-                    console.log(v);
-                    
+                    console.log('v ' + v);
+
                     v = v.normalized(stats.limit);
                 }
 
