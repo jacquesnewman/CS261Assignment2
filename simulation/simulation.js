@@ -19,7 +19,7 @@ module.exports.begin = (frameRate) => {
         {
             result = {
                 rotationRate: 120,
-                thrust: 5,
+                thrust: 12,
                 limit: 25
             };
             _stats[type] = result;
@@ -113,14 +113,12 @@ module.exports.begin = (frameRate) => {
             return new Vec2D(this.x + vec.x, this.y + vec.y);
         }
 
-        this.normalized = function(scale) {
+        this.normalized = function(limit) {
             let length = Math.sqrt((this.x * this.x) + (this.y * this.y));
-            if (scale > 0)
-                length = scale / length;
+            if (length <= limit)
+                return new Vec2D(this);
             else
-                length = 1 / length;
-
-            return new Vec2D(this.x * length, this.y * length);
+                return new Vec2D(this.x * limit / length, this.y * limit / length);
         }
     }
 
@@ -179,7 +177,7 @@ module.exports.begin = (frameRate) => {
                     v = v.plus(accel);
                     console.log('v ' + JSON.stringify(v));
 
-//                    v = v.normalized(stats.limit);
+                    v = v.normalized(stats.limit);
                 }
 
                 pos = pos.plus(v.times(interval));
