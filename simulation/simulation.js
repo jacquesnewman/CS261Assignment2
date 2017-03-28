@@ -35,7 +35,7 @@ module.exports.begin = (frameRate) => {
                 id: 'player' + id,
                 type: 'blueShip',
                 pos: { x: 0, y: 0 },
-                v: { x: 0, y: 0 },
+                v: { x: 1, y: 1 },
                 rot: 0,
                 controls: makeControls()
             }
