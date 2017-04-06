@@ -1,6 +1,6 @@
 {
 	"apps" : [{
-		"name"   : "assignment2",
+		"name"   : "cs261 example",
 		"script" : "./app.js",
 		"watch"  : true,
 		"env": {
