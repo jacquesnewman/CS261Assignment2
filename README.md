@@ -1,5 +1,8 @@
 # CS261 Example project
 
+_See http://demo_front.johannesmp.com/ for a demo of the code in this repo running._
+
+
 This repo demonstrates what your CS261 Project might look like.
 
 - The `Client` directory is intended to be hosted statically on your nginx load balancer
@@ -12,7 +15,9 @@ For assignment 4 you will need to make changes to both the Client and the Server
 
 --------------------------
 
-For clarification, here is how the information here is structured, and how requests are expected to be handled:
+the provided [cs261_nginx_example.conf](https://github.com/stebee/CS261Assignment2/blob/master/cs261_nginx_example.conf) file is correctly configured to meet all the required requests.
+
+For clarification, here is how the repo and app requests are structured, and how requests are expected to be handled.
 
 ## File Structure
 
