@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Standard Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Custom Meta -->
+    <meta name="description" content="CS261 Game">
+    <meta name="author" content="CS261 Game">
+    <title>CS261 Game</title>
+
+    <!-- JQuery (easier DOM manipulation)-->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+    <!-- PIXI for our game engine -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.2.2/pixi.min.js"></script>
+
+    <!-- Socket.io to get websockets -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+
+    <!-- SJCL crypto library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.6/sjcl.min.js"></script>
+
+    <!-- RequireJS for Module loading -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.3/require.min.js" integrity="sha256-4FF6zC8o0//sei6CJUD+MJIhewXKgcrV/iA/4HD4A8c=" crossorigin="anonymous"></script>
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #000000;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <!-- NO BODY HERE :D It's all added dynamically by PIXI-->
+    
+    <script>
+      // Extract data from query string
+      var queryData = {};
+      location.search.substr(1).split("&").forEach( function(item) {
+        queryData[item.split("=")[0]] = item.split("=")[1];
+      });
+
+      var config = {
+        // Websocket Configs - you shouldn't need to touch these (except when debugging)
+        ws_domain: window.location.hostname,  // Defaults to your current domain in the browser
+        ws_port: 9009,                        // Which port will nginx redirect to your app's gameserver routes.
+        ws_path: 'net/v1/',                   // The path that nginx expects websocket requests on.
+
+        // Game authentication config - you shouldn't need to touch these (except when debugging)
+        session: queryData._session,
+        token: queryData._token,
+        id: queryData.id,
+      };
+    
+
+      // DEBUG - REMOVE WHEN YOU HAVE NGINX SET UP
+      config.ws_port = 7000;
+      config.ws_path = '';
+
+
+      // Once jQuery is ready, we can start running main
+      $(function() {
+        requirejs(["./scripts/core/game.js"], function(main) {
+
+          const ws = new WebSocket('ws://' + config.ws_domain + ':' + config.ws_port + '/' + config.ws_path);
+
+          main.begin(config, ws);
+        });
+      });
+    </script>
+  </body>
+</html>
