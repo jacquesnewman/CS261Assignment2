@@ -26,14 +26,14 @@ Finally, upon logging in, the user should be redirected to the game page.
 
 ## 1. AJAX API Calls
 
-You only need to modify [`/static/scripts/main.js`](https://github.com/JohannesMP/CS261_Assignment4_LoginPage/blob/master/static/scripts/main.js). 
+You only need to modify [`/static/scripts/main.js`](https://github.com/stebee/CS261Assignment2/blob/master/Client/static/scripts/main.js). 
 
 `/index.html`, `/static/scripts/form.js` and `/static/scripts/status.js` don't need to be touched unless you are feeling adventurous.
 
 In main.js:
 
-- The functions [`doCreate(data) {...}`](https://github.com/JohannesMP/CS261_Assignment4_LoginPage/blob/master/static/scripts/main.js#L58-L68) and [`doLogin(data){...}`](https://github.com/JohannesMP/CS261_Assignment4_LoginPage/blob/master/static/scripts/main.js#L45-L55) are currently called when the user clicks the `Create` or `Submit` button, using the contents of the form. The form is auto-validating to be non-empty. You do not need to validate the input.
-- A placeholder [`dummyAPICall`](https://github.com/JohannesMP/CS261_Assignment4_LoginPage/blob/master/static/scripts/main.js#L72-L83) function is currently used in `doLogin` and `doCreate`. This should be replaced with a proper jQuery json API call to your server, the reply of which should be displayed in the on-screen status panel.
+- The functions [`doCreate(data) {...}`](https://github.com/stebee/CS261Assignment2/blob/master/Client/static/scripts/main.js#L58-L68) and [`doLogin(data){...}`](https://github.com/stebee/CS261Assignment2/blob/master/Client/static/scripts/main.js#L45-L55) are currently called when the user clicks the `Create` or `Submit` button, using the contents of the form. The form is auto-validating to be non-empty. You do not need to validate the input.
+- A placeholder [`dummyAPICall`](https://github.com/stebee/CS261Assignment2/blob/master/Client/static/scripts/main.js#L72-L83) function is currently used in `doLogin` and `doCreate`. This should be replaced with a proper jQuery json API call to your server, the reply of which should be displayed in the on-screen status panel.
 - See the current usage of `setLoading(msg)` and `setStatus(msg, status)` calls in `dummyAPICall`. Your implementation should exhibit similarly responsive behavior.
 
 Example ajax call:
