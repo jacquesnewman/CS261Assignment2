@@ -15,7 +15,7 @@ For assignment 4 you will need to make changes to both the Client and the Server
 
 --------------------------
 
-the provided [cs261_nginx_example.conf](https://github.com/stebee/CS261Assignment2/blob/master/cs261_nginx_example.conf) file is correctly configured to meet all the required requests.
+The provided [cs261_nginx_example.conf](https://github.com/stebee/CS261Assignment2/blob/master/cs261_nginx_example.conf) file is correctly configured to meet all the required requests.
 
 For clarification, here is how the repo and app requests are structured, and how requests are expected to be handled.
 
@@ -34,7 +34,7 @@ For clarification, here is how the repo and app requests are structured, and how
 
 ## Request Structure
 
-- `<Domain>`**`/`** and `<Domain>`**`/index.html`* - The server root. Should statically host the login dialog directory (`/Client/`), hosted on your nginx machine. The `index.html` is implied when accessing with only `/`.
+- `<Domain>`**`/`** and `<Domain>`**`/index.html`** - The server root. Should statically host the login dialog directory (`/Client/`), hosted on your nginx machine. The `index.html` is implied when accessing with only `/`.
    - Use the nginx `root` directive to redirect requests on a given location to a given folder on your drive, in this case the Client folder of your repo.
 
 - `<Domain>`**`/Game/`** and `<Domain>`**`/Game/`** - Should statically host the game.
