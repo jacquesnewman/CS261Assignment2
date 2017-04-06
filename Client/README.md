@@ -69,7 +69,7 @@ See http://api.jquery.com/jquery.ajax/ for documentation on jquery's ajax functi
  
 Once the user has clicked 'login' with a valid existing username/password, the server will return a session/token. With this token you can then redirect the user to the game page, which should be located at `user-name.cs261.net/Game/`
  
-You can redirect the user's browser simply setting the `window.location.href` variable to the `<url>?<querystring>`. So when a user logs in they should be redirected to `https://user-name.cs261.net/Game/?_session=SESSION&_token=TOKEN`, allowing them to play the game.
+You can redirect the user's browser simply setting the `window.location.href` variable to the `<url>?<querystring>`. So when a user logs in they should be redirected to `https://user-name.cs261.net/Game/?_session=SESSION&_token=TOKEN&id=USERID`, allowing them to play the game.
 
 To verify that the login query was completed successfully, delay the redirection by a few seconds so the server's reply is visible.
 
