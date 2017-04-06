@@ -40,8 +40,8 @@
   </head>
   <body>
     
-    <!-- NO BODY HERE :D It's all added dynamically by PIXI-->
-    
+    <!-- NO BODY; It's all added dynamically by PIXI. You can add stuff if you want though -->
+
     <script>
       // Extract data from query string
       var queryData = {};
@@ -49,6 +49,9 @@
         queryData[item.split("=")[0]] = item.split("=")[1];
       });
 
+      
+      // Passing in configs to the game
+      // You are welcome to modify these as your API requires
       var config = {
         // Websocket Configs - you shouldn't need to touch these (except when debugging)
         ws_domain: window.location.hostname,  // Defaults to your current domain in the browser
@@ -59,21 +62,17 @@
         session: queryData._session,
         token: queryData._token,
         id: queryData.id,
+
+        // etc...
       };
     
-
-      // DEBUG - REMOVE WHEN YOU HAVE NGINX SET UP
-      config.ws_port = 7000;
-      config.ws_path = '';
-
-
       // Once jQuery is ready, we can start running main
       $(function() {
-        requirejs(["./scripts/core/game.js"], function(main) {
-
+        requirejs(["./scripts/core/game.js"], function(game) {
+          // Construct websocket
           const ws = new WebSocket('ws://' + config.ws_domain + ':' + config.ws_port + '/' + config.ws_path);
-
-          main.begin(config, ws);
+          // Start game
+          game.begin(config, ws);
         });
       });
     </script>
