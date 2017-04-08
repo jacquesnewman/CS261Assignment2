@@ -28,10 +28,6 @@ The heavy work is done by the networking stack, which is found in the following 
 
 
  */
-function doTestSocket(req, res, next) {
-    res.setHeader('Content-Type', 'text/html');
-    res.render('gameserver/landing', { session: req.session });
-}
 
 module.exports.register = (root, app, authMiddleware) => {
     _root = root;
