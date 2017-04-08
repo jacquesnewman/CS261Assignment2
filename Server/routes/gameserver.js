@@ -25,14 +25,7 @@ The heavy work is done by the networking stack, which is found in the following 
  Prioritization: Optimize use of bandwidth
  Replication: Serialize/deserialize
  Application: Game logic
-
-
  */
-
-module.exports.register = (root, app, authMiddleware) => {
-    _root = root;
-    app.all(_root, authMiddleware, doTestSocket);
-}
 
 module.exports.registerWebsockets = (server) => {
     _server = new ws.Server({ server: server, perMessageDeflate: false });
