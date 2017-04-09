@@ -34,7 +34,7 @@ For clarification, here is how the repo and app requests are structured, and how
 
 ## Request Structure
 
-- `<Domain>`**`/`** and `<Domain>`**`/index.html`** - The server root. Should statically host the login dialog directory (`/Client/`), hosted on your nginx machine. The `index.html` is implied when accessing with only `/`.
+- `<Domain>`**`/`** and `<Domain>`**`/index.html`** - The server root. Should statically host the login dialog directory (`/Client/`), hosted on your nginx machine. The `index.html` is implied when accessing with only `<Domain>/`.
    - Use the nginx `root` directive to redirect requests on a given location to a given folder on your drive, in this case the Client folder of your repo.
 
 - `<Domain>`**`/Game/`** and `<Domain>`**`/Game/`** - Should statically host the game.
