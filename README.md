@@ -44,4 +44,4 @@ For clarification, here is how the repo and app requests are structured, and how
 
 - `<Domain>`**`:9009/net/v1/`** - The websocket route. All data for the live multiplayer game is sent over this.
    - Port 9009 is used to prevent websocket from going over HTTPS (port 443) which can cause problems
-   - For example if your appserver is running on port 7000 `<Domain>:9009/net/v1/` should be redirected to `YOUR.APP.SERVER.IP:7000/`
+   - For example if your appserver is running on port 7000 `<Domain>:9009/net/v1/` should be redirected to `YOUR.APP.SERVER.IP:7000/` and should be handled by [`gameserver.js`](https://github.com/stebee/CS261Assignment2/blob/master/Server/routes/gameserver.js)
