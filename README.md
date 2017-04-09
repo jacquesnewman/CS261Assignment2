@@ -41,7 +41,9 @@ For clarification, here is how the repo and app requests are structured, and how
 
 - `<Domain>`**`/api/v1/...`** - The api route. Should be redirected by nginx to your App server. 
    - For example if your appserver is running on port 7000, `<Domain>/api/v1/users/create` should be redirected to `YOUR.APP.SERVER.IP:7000/users/create`.
+   - Use the nginx 'rewrite' directive. [see example here](https://github.com/stebee/CS261Assignment2/blob/master/cs261_nginx_example.conf#L45).
 
 - `<Domain>`**`:9009/net/v1/`** - The websocket route. All data for the live multiplayer game is sent over this.
    - Port 9009 is used to prevent websocket from going over HTTPS (port 443) which can cause problems
    - For example if your appserver is running on port 7000 `<Domain>:9009/net/v1/` should be redirected to `YOUR.APP.SERVER.IP:7000/` and should be handled by [`gameserver.js`](https://github.com/stebee/CS261Assignment2/blob/master/Server/routes/gameserver.js)
+   - Use the nginx 'rewrite' directive. [see example here](https://github.com/stebee/CS261Assignment2/blob/master/cs261_nginx_example.conf#L88).
