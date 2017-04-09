@@ -77,7 +77,7 @@ For example, you could use [setInterval](https://developer.mozilla.org/en-US/doc
 
 ```javascript
 // assume 'msg' contains the server's success reply.
-// assume 'redirectToGame()' is implemented to update window.location.href appropriately.
+// assume 'redirectToGame(...)' is implemented to update window.location.href appropriately.
 // assume 'config.openGameOnLogin' and 'config.openGameDelay' are passed into main via index.html.
 
 if(config.openGameOnLogin) {
@@ -92,7 +92,7 @@ if(config.openGameOnLogin) {
     timer -= tickRate;
     if(timer < 0) {
       clearInterval(countdown);
-      redirectToGame();
+      redirectToGame(/* relevant args here */);
     } else {
       // setStatus arg3 = true disables buttons during countdown
       setStatus(redirectMsg + (timer/1000) + " seconds", "success", true);
