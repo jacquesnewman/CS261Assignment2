@@ -1,6 +1,6 @@
 # CS261 Example project
 
-_See http://demo_front.johannesmp.com/ for a demo of the code in this repo running._
+_See http://j-peter.cs261.net for a demo of the code in this repo running._
 
 
 This repo demonstrates what your CS261 Project might look like.
